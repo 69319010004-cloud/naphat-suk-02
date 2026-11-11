@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>เกมทายตัวเลข</h1>
+<input type="number" id="guess">
+<button class="button" onclick="checkGuess()">ทายตัวเลข</button>
+
+    <p>ลองทายตัวเลขที่คอมพิวเตอร์สุ่มขึ้นมา</p>
+    <p>ตัวเลขอยู่ระหว่าง 1 - 100</p>
+
+    <input type="number" id="guess" placeholder="ใส่ตัวเลข">
+
+    <button onclick="checkGuess()">ทายตัวเลข</button>
+
+    <p id="result"></p>
+    <p id="attempts">จำนวนครั้งที่ทาย: 0</p>
+
+    <button onclick="resetGame()">เริ่มเกมใหม่</button>
+ <img src="/src/R.jfif" alt="รูปภาพ" width="340" height="180">
+
+    <script>
+        let answer = Math.floor(Math.random() * 100) + 1;
+        let count = 0;
+        let finished = false;
+
+        function checkGuess() {
+            let guess = Number(document.getElementById("guess").value);
+            let result = document.getElementById("result");
+
+            if (finished) {
+                result.innerHTML = "กรุณาเริ่มเกมใหม่";
+                return;
+            }
+
+            if (guess < 1 || guess > 100 || !Number.isInteger(guess)) {
+                result.innerHTML = "กรุณาใส่ตัวเลข 1 - 100";
+                return;
+            }
+
+            count++;
+
+            if (guess === answer) {
+                result.innerHTML = "ถูกต้อง! คุณทายถูกแล้ว";
+                finished = true;
+            } 
+            else if (guess < answer) {
+                result.innerHTML = "น้อยเกินไป! ลองทายใหม่";
+            } 
+            else {
+                result.innerHTML = "มากเกินไป! ลองทายใหม่";
+            }
+
+            document.getElementById("attempts").innerHTML =
+                "จำนวนครั้งที่ทาย: " + count;
+        }
+
+        function resetGame() {
+            answer = Math.floor(Math.random() * 100) + 1;
+            count = 0;
+            finished = false;
+
+            document.getElementById("guess").value = "";
+            document.getElementById("result").innerHTML = "";
+            document.getElementById("attempts").innerHTML =
+                "จำนวนครั้งที่ทาย: 0";
+        }
+    </script>
+
+<h2>Menu</h2>
+
+<a href="../index.html">Home</a> |
+<a href="/page/aboutus.html">About Us</a> |
+<a href="/page/contact.html">Contact</a> |
+<a href="/page/game.html">Game</a>    |
+<a href="/page/image.html">image</a>
+</body>
+</html>
